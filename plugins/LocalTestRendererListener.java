@@ -59,12 +59,12 @@ public final class LocalTestRendererListener {
                     double x = point.getDouble("tile_x");
                     double y = point.getDouble("tile_y");
 
-                    double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/4D;
-                    double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/4D;
+                    double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/2D;
+                    double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/2D;
 
                     graphics.setColor(Color.GRAY);
                     
-                    fillCircle(circle_x, circle_y, game.getTrackTileSize()/2D);
+                    fillCircle(circle_x, circle_y, game.getTrackTileSize()/5D);
                 }
 
                 } catch (Exception ex) {
