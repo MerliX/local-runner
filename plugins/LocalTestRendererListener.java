@@ -7,9 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
  
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONArray;
+// import org.json.JSONException;
+// import org.json.JSONObject;
+// import org.json.JSONArray;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -39,6 +39,40 @@ public final class LocalTestRendererListener {
         // for (Car car : world.getCars()) {
         //     drawCircle(car.getX(), car.getY(), hypot(car.getWidth(), car.getHeight()) / 2.0D);
         // }
+
+        String content = "";
+        try {
+            content = new String(Files.readAllBytes(Paths.get("/Users/merlix/Projects/russianaicup2015/way.json")));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+
+        if (content != "") {
+            try {
+                JSONObject obj = new JSONObject(content);
+                JSONArray arr = obj.getJSONArray("points");
+                
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject point = arr.getJSONObject(i);
+
+                    double x = point.getDouble("tile_x");
+                    double y = point.getDouble("tile_y");
+
+                    double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/4D;
+                    double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/4D;
+
+                    graphics.setColor(Color.GRAY);
+                    
+                    fillCircle(circle_x, circle_y, game.getTrackTileSize()/2D);
+                }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            
+        }
     }
 
     public void afterDrawScene(Graphics graphics, World world, Game game, int canvasWidth, int canvasHeight,
@@ -52,40 +86,7 @@ public final class LocalTestRendererListener {
         //     fillCircle(car.getX(), car.getY(), car.getHeight() / 2.0D);
         // }
 
-        String content = "";
-        try {
-            content = new String(Files.readAllBytes(Paths.get("/Users/merlix/Projects/russianaicup2015/way.json")));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-
-        }
-         System.out.println(content);
-
-        if (content != "") {
-            try {
-                JSONObject obj = new JSONObject(content);
-                JSONArray arr = obj.getJSONArray("points");
-                
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject point = arr.getJSONObject(i);
-
-                    int x = point.getInt("tile_x");
-                    int y = point.getInt("tile_x");
-
-                    double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/2D;
-                    double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/2D;
-
-                    graphics.setColor(Color.GRAY);
-                    
-                    fillCircle(circle_x, circle_y, game.getTrackTileSize()/2D);
-                }
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-
-            
-        }
+        
 
         
 
