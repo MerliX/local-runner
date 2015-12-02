@@ -79,15 +79,36 @@ public final class LocalTestRendererListener {
                                double left, double top, double width, double height) {
         updateFields(graphics, world, game, canvasWidth, canvasHeight, left, top, width, height);
 
-        // graphics.setColor(Color.BLACK);
-        // drawCircle(2600.0D, 2600.0D, 2400.0D);
+        graphics.setColor(Color.RED);
 
-        // for (Car car : world.getCars()) {
-        //     fillCircle(car.getX(), car.getY(), car.getHeight() / 2.0D);
-        // }
+        String content = "";
+        try {
+            content = new String(Files.readAllBytes(Paths.get("/Users/merlix/Projects/russianaicup2015/move.json")));
+        } catch (Exception ex) {
+            ex.printStackTrace();
 
-        
+        }
 
+        if (content != "") {
+            try {
+                JSONObject obj = new JSONObject(content);
+                boolean breaking = obj.getBoolean("brake");
+                System.out.println(breaking);
+                
+                graphics.setColor(Color.RED);
+
+                for (Car car : world.getCars()) {
+                    if (car.getPlayerId() == 1 && breaking) {
+                        drawCircle(car.getX(), car.getY(), hypot(car.getWidth(), car.getHeight()) / 2.0D);
+                    }
+                }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            
+        }
         
 
     }
