@@ -56,15 +56,15 @@ public final class LocalTestRendererListener {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject point = arr.getJSONObject(i);
 
-                    double x = point.getDouble("tile_x");
-                    double y = point.getDouble("tile_y");
+                    double x = point.getDouble("coord_x");
+                    double y = point.getDouble("coord_y");
 
-                    double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/2D;
-                    double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/2D;
+                    // double circle_x = x * game.getTrackTileSize() + game.getTrackTileSize()/2D;
+                    // double circle_y = y * game.getTrackTileSize() + game.getTrackTileSize()/2D;
 
                     graphics.setColor(Color.GRAY);
                     
-                    fillCircle(circle_x, circle_y, game.getTrackTileSize()/5D);
+                    fillCircle(x, y, game.getTrackTileSize()/5D);
                 }
 
                 } catch (Exception ex) {
